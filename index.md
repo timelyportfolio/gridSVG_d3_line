@@ -14,26 +14,26 @@ assets:
   - "http://d3js.org/d3.v3.js"
 ---
   
-  <style>
-  body{
-    font-family: 'Oxygen', sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-h1,h2,h3,h4 {
-  font-family: 'Raleway', sans-serif;
+<style>
+body{
+  font-family: 'Oxygen', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
 }
 
-.container { width: 1000px; }
+h1,h2,h3,h4 {
+font-family: 'Raleway', sans-serif;
+}
+
+.container { width: 900px; }
 
 h3 {
-  background-color: #D4DAEC;
-    text-indent: 100px; 
+background-color: #D4DAEC;
+  text-indent: 100px; 
 }
 
 h4 {
-  text-indent: 100px;
+text-indent: 100px;
 }
 </style>
   
@@ -98,7 +98,7 @@ cat(saveXML(oursvg$svg))
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="720px" height="432px" viewBox="0 0 720 432" version="1.1">
   <metadata xmlns:gridsvg="http://www.stat.auckland.ac.nz/~paul/R/gridSVG/">
-    <gridsvg:generator name="gridSVG" version="1.3-0" time="2013-08-08 15:12:52"/>
+    <gridsvg:generator name="gridSVG" version="1.3-0" time="2013-08-08 15:15:05"/>
     <gridsvg:argument name="name" value=""/>
     <gridsvg:argument name="exportCoords" value="none"/>
     <gridsvg:argument name="exportMappings" value="none"/>

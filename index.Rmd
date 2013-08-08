@@ -14,26 +14,26 @@ assets:
   - "http://d3js.org/d3.v3.js"
 ---
   
-  <style>
-  body{
-    font-family: 'Oxygen', sans-serif;
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-h1,h2,h3,h4 {
-  font-family: 'Raleway', sans-serif;
+<style>
+body{
+  font-family: 'Oxygen', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
 }
 
-.container { width: 1000px; }
+h1,h2,h3,h4 {
+font-family: 'Raleway', sans-serif;
+}
+
+.container { width: 900px; }
 
 h3 {
-  background-color: #D4DAEC;
-    text-indent: 100px; 
+background-color: #D4DAEC;
+  text-indent: 100px; 
 }
 
 h4 {
-  text-indent: 100px;
+text-indent: 100px;
 }
 </style>
   
