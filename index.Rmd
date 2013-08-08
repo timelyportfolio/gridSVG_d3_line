@@ -45,7 +45,7 @@ In [I Want ggplot2/lattice and d3 (gridSVG–The Glue)](http://timelyportfolio.b
 
 ```{r echo = F, warning=F, error=F, message=F}
 require(knitr)
-opts_chunk$set(warning=F, error=F, message=F, fig.width = 10, fig.height = 4, results='asis', cache = F, tidy = F)
+opts_chunk$set(warning=F, error=F, message=F, fig.width = 10, fig.height = 6, results='asis', cache = F, tidy = F)
 ```
 
 ```{r}
@@ -93,7 +93,7 @@ cat(saveXML(oursvg$svg))
 
 ### Watch This Reverse Data Bind
 
-If we look at our line from the SVG, we see something like this.
+The interactivity you see in the chart above does not just happen.  We have to work a little for it.  If we look at our line from the SVG, we see something like this.
 
 ![Screenshot of SVG line points](svgline.png)
 
@@ -102,7 +102,13 @@ So we have our line, and the points are attributes which we can see by using d3.
 ```
 d3.select("[id*='xyplot.lines']").select("polyline").attr("points")
 ```
-On the scatter plot, each point was its own little SVG element, and our data could be bound directly to it.  To bind data to our line, we will need to use d3 to create a new path/line or new points.  I think the new path/line method is more interesting, so I'll choose that route.  We will need to split the long string of points into separate coordinates.  I wrote a function (please don't be too critical) to do this and also add our R data while we are at it.
+On the scatter plot, each point was its own little SVG element, and our data could be bound directly to it.  To bind data to our line, I can think of three methods.
+
+1. Let lattice draw points that we bind and make invisible with d3.
+1. Use d3 to create a new path/line
+1. Use d3 to create new points
+
+I think the d3 new path/line method is more interesting, so I'll choose that route.  We will need to split the long string of points into separate coordinates.  I wrote a function (please don't be too critical) to do this and also add our R data while we are at it.
 
 ```
 function pointsToArray(points, data) {
@@ -158,7 +164,7 @@ cat('<script> ourdata=',
 )
 ```
 
-Then we will use the same function from our ggplot2 scatter post.
+Use the same code from our ggplot2 scatter post to get our data in bindable format.  This bit of code translates our array of arrays of objects into an array of objects.  d3 finds this much more palatable.
 
 ```{r}
 cat(
@@ -247,7 +253,7 @@ svg.append("rect")
     .on("mousemove", mousemove);
 ```
 
-Use d3's `d3.bisector` to determine the position of our mouse and translate this position to the appropriate point and data.  We will then move our `focus` element from above to the found point.  Also, since we have d3 we will use its `d3.format` to give us percent number, and our color will change based on a negative or positive value.
+Use d3's `d3.bisector` to determine the position of our mouse and translate this position to the appropriate point and data.  We will then move our `focus` element created above to the found point.  Also, since we have d3 we will use its `d3.format` to give us percent number, and our color will change based on a negative or positive value.
 
 ```
 var bisectX = d3.bisector(function (d) { return +d.x; }).left;
@@ -325,3 +331,5 @@ function mousemove() {
     .attr("stroke",+d.data.value.y>0?"black":"red");
 }
 </script>
+
+I promise we will soon start to take fuller advantage of d3's expansive capablities.  This post will help to make sure we have the basics covered.  As I stated in the last post, this still should be considered experimental and not best practice.  Please let me know if you have any suggestions.
