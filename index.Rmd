@@ -1,0 +1,75 @@
+---
+title: R gridSVG Reverse d3 Data Bind with Lattice LIne
+author: Timely Portfolio
+github: {user: timelyportfolio, repo: gridSVG_d3_line, branch: "gh-pages"}
+framework: bootstrap
+mode: selfcontained
+highlighter: prettify
+hitheme: twitter-bootstrap
+assets:
+  css:
+  - "http://fonts.googleapis.com/css?family=Raleway:300"
+  - "http://fonts.googleapis.com/css?family=Oxygen"
+jshead:
+  - "http://d3js.org/d3.v3.js"
+---
+  
+  <style>
+  body{
+    font-family: 'Oxygen', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+h1,h2,h3,h4 {
+  font-family: 'Raleway', sans-serif;
+}
+
+.container { width: 1000px; }
+
+h3 {
+  background-color: #D4DAEC;
+    text-indent: 100px; 
+}
+
+h4 {
+  text-indent: 100px;
+}
+</style>
+  
+<a href="https://github.com/timelyportfolio/gridSVG_d3_line"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+# gridSVG Data Binding with a Lattice Line
+
+In [I Want ggplot2/lattice and d3 (gridSVG–The Glue)](http://timelyportfolio.blogspot.com/2013/08/gridsvganother-glue-for-r-to-svg.html) I demonstrated a trick I call "a d3 reverse data bind" on a ggplot2 scatterplot graph.  I discovered that lines are slightly more difficult to reverse data bind with d3.  Let's look at the extra steps needed to make it happen on a line chart from the [OECD data recently added to FRED](http://news.research.stlouisfed.org/2013/07/58000-main-economic-indicators-mei-from-the-oecd-added-to-fred/).  Retail Trade Sales: Passenger Car Registrations for Greece (SLRTCR03GRA657S) seems like something interesting.
+
+```{r echo = F, warning=F, error=F, message=F}
+require(knitr)
+opts_chunk$set(warning=F, error=F, message=F, fig.width = 10, fig.height = 4, results='asis', cache = F, tidy = F)
+```
+
+```{r}
+#get the latest version of gridSVG
+#install.packages("gridSVG", repos="http://R-Forge.R-project.org")
+
+require(latticeExtra)
+require(gridSVG)
+require(quantmod)
+
+#get data from FRED
+greekCars <- getSymbols("SLRTCR03GRA657S", src="FRED", auto.assign=F)
+```
+
+Let's use `lattice` this time instead of `ggplot2`.  We will draw a basic line graph to keep it simple.
+
+```{r}
+p1 <- asTheEconomist(
+  xyplot(
+    greekCars,
+    scales = list(y = list(rot=0)),
+    main = "Car Registrations for Greece (data source: FRED) "
+  )
+)
+p1
+```
+
